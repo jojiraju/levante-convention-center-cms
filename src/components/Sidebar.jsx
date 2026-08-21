@@ -1,11 +1,11 @@
 
-import { LayoutDashboard as DashboardIcon, LogOut as LogOutIcon, List as ListIcon } from 'lucide-react';
+import { LayoutDashboard as DashboardIcon, LogOut as LogOutIcon, List as ListIcon, X as CloseIcon } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { createPortal } from 'react-dom';
 import toast from 'react-hot-toast';
 import { useState } from 'react';
 
-export default function Sidebar({ onLogout }) {
+export default function Sidebar({ onLogout, isOpen, setIsOpen }) {
   const location = useLocation();
   const [showLogoutModal, setShowLogoutModal] = useState(false);
 
@@ -19,10 +19,20 @@ export default function Sidebar({ onLogout }) {
     onLogout();
   };
   return (
-    <aside className="sidebar">
-      <div className="sidebar-header" style={{ padding: '16px', display: 'flex', justifyContent: 'center' }}>
-        <img src="/logo.png" alt="Levante Logo" style={{ width: '150px', objectFit: 'contain' }} />
-      </div>
+    <>
+      {isOpen && (
+        <div 
+          className="sidebar-overlay"
+          onClick={() => setIsOpen(false)}
+        />
+      )}
+      <aside className={`sidebar ${isOpen ? 'open' : ''}`}>
+        <div className="sidebar-header" style={{ padding: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <img src="/logo.png" alt="Levante Logo" style={{ width: '150px', objectFit: 'contain' }} />
+          <button className="mobile-close-btn" onClick={() => setIsOpen(false)}>
+            <CloseIcon size={24} />
+          </button>
+        </div>
       <nav className="sidebar-nav">
         <Link to="/" className={`nav-item ${location.pathname === '/' ? 'active' : ''}`}>
           <DashboardIcon size={20} />
@@ -89,6 +99,7 @@ export default function Sidebar({ onLogout }) {
         </div>,
         document.body
       )}
-    </aside>
+      </aside>
+    </>
   );
 }

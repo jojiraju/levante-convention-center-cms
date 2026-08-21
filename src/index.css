@@ -143,6 +143,10 @@ h1, h2, h3, h4, h5, h6, .topbar-title {
   opacity: 0.9;
 }
 
+.login-card .login-btn:active {
+  transform: translateY(0);
+}
+
 .login-card .btn-primary:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(197, 160, 89, 0.4);
@@ -170,6 +174,9 @@ h1, h2, h3, h4, h5, h6, .topbar-title {
   flex-direction: column;
   border-radius: 24px;
   height: calc(100vh - 40px);
+  transition: transform 0.3s ease;
+  z-index: 1000;
+  flex-shrink: 0;
 }
 
 .sidebar-header {
@@ -501,5 +508,104 @@ h1, h2, h3, h4, h5, h6, .topbar-title {
 .login-header p {
   color: rgba(255, 255, 255, 0.7);
   font-size: 1rem;
+}
+
+
+/* --- Mobile Responsiveness --- */
+
+.mobile-menu-btn, .mobile-close-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.mobile-menu-btn:hover, .mobile-close-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 999;
+}
+
+@media (max-width: 1024px) {
+  .dashboard-layout {
+    padding: 16px;
+    gap: 16px;
+  }
+  
+  .sidebar {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    bottom: 16px;
+    height: calc(100vh - 32px);
+    transform: translateX(-150%);
+  }
+  
+  .sidebar.open {
+    transform: translateX(0);
+  }
+  
+  .sidebar-overlay {
+    display: block;
+  }
+  
+  .mobile-menu-btn, .mobile-close-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .topbar {
+    padding: 0 20px;
+    height: 64px;
+    margin-bottom: 16px;
+  }
+  
+  .stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+  
+  .dashboard-widgets {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-layout {
+    padding: 12px;
+  }
+  
+  .sidebar {
+    top: 12px;
+    left: 12px;
+    height: calc(100vh - 24px);
+    width: 280px;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .stat-card {
+    padding: 24px 20px;
+  }
+  
+  .data-card {
+    padding: 20px;
+  }
 }
 

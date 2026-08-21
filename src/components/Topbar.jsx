@@ -1,6 +1,7 @@
 import { useLocation } from 'react-router-dom';
+import { Menu } from 'lucide-react';
 
-export default function Topbar() {
+export default function Topbar({ toggleSidebar }) {
   const location = useLocation();
   let title = "Dashboard";
   if (location.pathname === '/bookings') {
@@ -11,7 +12,12 @@ export default function Topbar() {
 
   return (
     <header className="topbar">
-      <div className="topbar-title">{title}</div>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+        <button className="mobile-menu-btn" onClick={toggleSidebar}>
+          <Menu size={24} />
+        </button>
+        <div className="topbar-title">{title}</div>
+      </div>
       <div className="user-profile">
 
         <div className="avatar">A</div>

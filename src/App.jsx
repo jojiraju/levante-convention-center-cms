@@ -11,6 +11,7 @@ import './index.css';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
     <BrowserRouter>
@@ -23,9 +24,9 @@ function App() {
       }} />
       {isAuthenticated ? (
         <div className="dashboard-layout">
-          <Sidebar onLogout={() => setIsAuthenticated(false)} />
+          <Sidebar onLogout={() => setIsAuthenticated(false)} isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
           <div className="main-content">
-            <Topbar />
+            <Topbar toggleSidebar={() => setIsSidebarOpen(true)} />
             <div className="page-content">
               <Routes>
                 <Route path="/" element={<Dashboard />} />
