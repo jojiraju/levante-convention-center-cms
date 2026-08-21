@@ -7,14 +7,19 @@ import BookingsList from './pages/BookingsList';
 import BookingDetails from './pages/BookingDetails';
 import Sidebar from './components/Sidebar';
 import Topbar from './components/Topbar';
+import Preloader from './components/Preloader';
 import './index.css';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [showPreloader, setShowPreloader] = useState(true);
 
   return (
-    <BrowserRouter>
+    <>
+      {showPreloader && <Preloader onComplete={() => setShowPreloader(false)} />}
+      {!showPreloader && (
+        <BrowserRouter>
       <Toaster position="top-center" toastOptions={{
         style: {
           background: 'var(--surface-color)',
@@ -39,11 +44,13 @@ function App() {
         </div>
       ) : (
         <Routes>
-          <Route path="/login" element={<Login onLogin={() => setIsAuthenticated(true)} />} />
-          <Route path="*" element={<Navigate to="/login" replace />} />
+              <Route path="/login" element={<Login onLogin={() => setIsAuthenticated(true)} />} />
+              <Route path="*" element={<Navigate to="/login" replace />} />
         </Routes>
       )}
     </BrowserRouter>
+      )}
+    </>
   );
 }
 
