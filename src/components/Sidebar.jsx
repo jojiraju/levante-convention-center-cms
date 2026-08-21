@@ -1,6 +1,7 @@
 
 import { LayoutDashboard as DashboardIcon, LogOut as LogOutIcon, List as ListIcon } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
+import { createPortal } from 'react-dom';
 import toast from 'react-hot-toast';
 import { useState } from 'react';
 
@@ -39,7 +40,7 @@ export default function Sidebar({ onLogout }) {
         </button>
       </div>
 
-      {showLogoutModal && (
+      {showLogoutModal && createPortal(
         <div style={{
           position: 'fixed',
           top: 0,
@@ -51,7 +52,7 @@ export default function Sidebar({ onLogout }) {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          zIndex: 9999
+          zIndex: 99999
         }}>
           <div style={{
             background: 'linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02))',
@@ -67,7 +68,7 @@ export default function Sidebar({ onLogout }) {
             <h4 style={{ marginBottom: '12px', fontSize: '1.25rem', color: 'var(--secondary-color)', fontFamily: 'var(--font-serif)' }}>Confirm Logout</h4>
             <p style={{ marginBottom: '24px', color: 'var(--text-secondary)' }}>Are you sure you want to sign out?</p>
             <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end' }}>
-              <button
+              <button 
                 onClick={() => setShowLogoutModal(false)}
                 style={{ padding: '10px 20px', background: 'rgba(255,255,255,0.1)', border: 'none', borderRadius: '8px', color: 'white', cursor: 'pointer', transition: 'all 0.2s' }}
                 onMouseOver={(e) => e.target.style.background = 'rgba(255,255,255,0.15)'}
@@ -75,7 +76,7 @@ export default function Sidebar({ onLogout }) {
               >
                 Cancel
               </button>
-              <button
+              <button 
                 onClick={confirmLogout}
                 style={{ padding: '10px 20px', background: 'var(--danger)', border: 'none', borderRadius: '8px', color: 'white', cursor: 'pointer', transition: 'all 0.2s', fontWeight: '500' }}
                 onMouseOver={(e) => e.target.style.opacity = '0.9'}
@@ -85,7 +86,8 @@ export default function Sidebar({ onLogout }) {
               </button>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </aside>
   );
