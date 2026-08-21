@@ -34,11 +34,11 @@ export default function Sidebar({ onLogout, isOpen, setIsOpen }) {
           </button>
         </div>
       <nav className="sidebar-nav">
-        <Link to="/" className={`nav-item ${location.pathname === '/' ? 'active' : ''}`}>
+        <Link to="/" className={`nav-item ${location.pathname === '/' ? 'active' : ''}`} onClick={() => setIsOpen(false)}>
           <DashboardIcon size={20} />
           <span>Dashboard</span>
         </Link>
-        <Link to="/bookings" className={`nav-item ${location.pathname.startsWith('/bookings') ? 'active' : ''}`}>
+        <Link to="/bookings" className={`nav-item ${location.pathname.startsWith('/bookings') ? 'active' : ''}`} onClick={() => setIsOpen(false)}>
           <ListIcon size={20} />
           <span>Bookings</span>
         </Link>
