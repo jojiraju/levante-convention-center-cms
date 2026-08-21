@@ -20,7 +20,7 @@ function App() {
       {showPreloader && <Preloader onComplete={() => setShowPreloader(false)} />}
       {!showPreloader && (
         <BrowserRouter>
-      <Toaster position="top-center" toastOptions={{
+      <Toaster position="bottom-right" toastOptions={{
         style: {
           background: 'var(--surface-color)',
           color: 'var(--text-primary)',
